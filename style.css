@@ -56,15 +56,38 @@ html{
 .nav-responsive {
     padding: 5px 10px;
     cursor: pointer;
-    border: #1CB698;
     display: none;
     
+}
+
+nav.responsive {
+    position: absolute;
+    right: 20px;
+    top: 80px;
+    background: linear-gradient(135deg, #1e2326 0%, #252A2E 100%);
+    width: 280px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid #1CB698;
+    z-index: 1000;
+    animation: slideDown 0.3s ease-out;
 }
 
 .nav-responsive img {
     width: 70px; 
     height: 70px; 
     border-radius: 5px;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 
@@ -82,11 +105,11 @@ html{
 .inicio .contenido-banner{
     padding: 20px;
     background-color: #1e2326;
-    max-width: 500px;
+    /* max-width: 500px; */
     margin: auto;
     text-align: center;
     border-radius: 40px;
-    max-height: 90vh;
+    /* max-height: 90vh; */
 }
 
 .inicio .contenido-banner .me{
@@ -257,7 +280,8 @@ html{
 .sobremi .contenido-seccion p{
     font: 18px;
     line-height: 22px;
-    margin-bottom: 27px
+    margin-bottom: 27px;
+    ;
 }
 
 .sobremi .contenido-seccion p span{
@@ -831,6 +855,7 @@ footer {
         background-color: #252A2E;
         width: 200px;
     }
+
     nav.responsive ul{
         display: block !important;
 
@@ -842,6 +867,7 @@ footer {
     }
 }
 
+
 @media screen and (max-width:700px){
     .cont_encabezado header .logo a{
         font-size: 20px;
@@ -852,10 +878,7 @@ footer {
     .nav-responsive{
         margin-bottom: 0;
     }
-    .nav-responsive img {
-        width: 20px; 
-        height: 20px; 
-    }
+    
     .sobremi .fila2{
         display: block;
     }
