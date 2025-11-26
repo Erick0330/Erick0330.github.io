@@ -1,0 +1,542 @@
+<html lang="es">
+
+<head>
+    <title>Portfolio Abdiel Rodríguez</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Menu-->
+    <div class="cont_encabezado">
+        <header>
+            <div class="logo">
+                <a href="#">Abdiel</a>
+            </div>
+
+            <nav id="nav">
+                <ul>
+                    <li><a href="#inicio" onclick="seleccionar()">Start</a></li>
+                    <li><a href="#sobremi" onclick="seleccionar()">About me</a></li>
+                    <li><a href="#educacion_proyectos" onclick="seleccionar()">Education</a></li>
+                    <li><a href="#experiencia" onclick="seleccionar()">Work experience</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-responsive" onclick="mostrarOcultarMenu()">
+                <img src="img/bar.png" alt="barra de menu">
+            </div>
+        </header>
+    </div>
+
+    <!--Seccion inicio-->
+    <section id="inicio" class="inicio">
+        <div class="contenido-banner">
+            <div class="contenedor-img">
+                <img class="me" src="img/me.jpg" alt="me">
+            </div>
+            <h1>ABDIEL RODRIGUEZ</h1>
+            <h2>Software Engineer</h2>
+            <div class="redes">
+                <div class="redes-contenedor-inicio">
+                    <a href="mailto:abdielrl0330@gmail.com" target="_blank" class="red-social-inicio"
+                        aria-label="Email">
+                        <div class="icono-red-inicio">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
+                                    stroke="currentColor" stroke-width="2" />
+                                <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" />
+                            </svg>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/Erick0330" target="_blank" class="red-social-inicio"
+                        aria-label="GitHub">
+                        <div class="icono-red-inicio">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9 19C4 20.5 4 16.5 2 16M16 22V18.13C16.04 17.65 15.95 17.17 15.74 16.73C15.53 16.29 15.21 15.91 14.81 15.64C17.73 15.34 20.73 14.31 20.73 8.63C20.73 7.18 20.22 5.84 19.27 4.78C19.65 3.56 19.63 2.24 19.12 1.04C19.12 1.04 17.96 0.69 15.27 2.48C13.07 1.86 10.73 1.86 8.53 2.48C5.84 0.69 4.68 1.04 4.68 1.04C4.17 2.24 4.15 3.56 4.53 4.78C3.58 5.84 3.07 7.18 3.07 8.63C3.07 14.3 6.07 15.33 8.99 15.64C8.59 15.91 8.27 16.29 8.06 16.73C7.85 17.17 7.76 17.65 7.8 18.13V22"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/abdiel-rodr%C3%ADguez-lara-9147b8290" target="_blank"
+                        class="red-social-inicio" aria-label="LinkedIn">
+                        <div class="icono-red-inicio">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M6 9H2V21H6V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M4 6C5.10457 6 6 5.10457 6 4C6 2.89543 5.10457 2 4 2C2.89543 2 2 2.89543 2 4C2 5.10457 2.89543 6 4 6Z"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </a>
+
+                    <a href="https://t.me/GodKiller_Gray030730" target="_blank" class="red-social-inicio"
+                        aria-label="Telegram">
+                        <div class="icono-red-inicio">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 5L2 12.5L9 15M21 5L15 21L9 15M21 5L9 15" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Seccion sobre mi-->
+    <section id="sobremi" class="sobremi">
+        <div class="contenido-seccion">
+            <h2>About me</h2>
+            <p><span>Hi, this is Abdiel Rodríguez Lara.</span> I am a Software Engineer specialized in full-stack
+                development, AI engineering and web accessibility auditing. I have experience building and maintaining
+                production-level applications using technologies like Spring Boot, Nest.js, Angular, Vue.js and
+                PostgreSQL. I’ve also
+                worked in quality assurance and WCAG 2.2 accessibility testing for enterprise websites. My background
+                combines
+                backend architecture, frontend engineering, machine learning pipelines and robust issue documentation
+                for
+                high-impact projects.</p>
+
+
+            <div class="fil">
+                <!--datos personales-->
+                <div class="col">
+                    <h3>Personal Data</h3>
+
+                    <ul>
+                        <li>
+                            <strong>Email</strong>
+                            abdielrl0330@gmail.com
+                        </li>
+
+                        <li>
+                            <strong>Phone number</strong>
+                            58473229
+                        </li>
+
+                        <li>
+                            <strong>GitHub</strong>
+                            https://github.com/Erick0330
+                        </li>
+
+                        <li>
+                            <strong>Linkedin</strong>
+                            http://www.linkedin.com/in/abdiel-rodríguez-lara
+                        </li>
+
+                        <li>
+                            <strong>Address</strong>
+                            Marianao, La Habana, Cuba
+                        </li>
+
+                        <li>
+                            <strong>Birth</strong>
+                            30-07-2003
+                        </li>
+                    </ul>
+                </div>
+
+                <!--Tecnologias-->
+                <div class="col">
+                    <h3>Technologies</h3>
+
+                    <div class="contenedor-tecnologias">
+
+                        <!-- PROGRAMMING LANGUAGES -->
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/java.svg" alt="Java">
+                            <span>Java</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/javascript.svg"
+                                alt="JavaScript">
+                            <span>JavaScript</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/typescript.svg"
+                                alt="TypeScript">
+                            <span>TypeScript</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/python.svg" alt="Python">
+                            <span>Python</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/c.svg" alt="C">
+                            <span>C</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/cplusplus.svg" alt="C++">
+                            <span>C++</span>
+                        </div>
+
+
+                        <!-- FRONTEND -->
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/html5.svg" alt="HTML5">
+                            <span>HTML5</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/css3.svg" alt="CSS3">
+                            <span>CSS3</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/javascript.svg"
+                                alt="JavaScript">
+                            <span>JS</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/angular.svg" alt="Angular">
+                            <span>Angular</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/vuedotjs.svg" alt="Vue.js">
+                            <span>Vue.js</span>
+                        </div>
+
+
+                        <!-- BACKEND FRAMEWORKS -->
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/springboot.svg"
+                                alt="Spring Boot">
+                            <span>Spring Boot</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/nestjs.svg" alt="Nest.js">
+                            <span>Nest.js</span>
+                        </div>
+
+
+                        <!-- DATABASES -->
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/postgresql.svg"
+                                alt="PostgreSQL">
+                            <span>PostgreSQL</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/mysql.svg" alt="MySQL">
+                            <span>MySQL</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/sqlite.svg" alt="SQLite">
+                            <span>SQLite</span>
+                        </div>
+
+
+                        <!-- AI & MACHINE LEARNING -->
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/tensorflow.svg"
+                                alt="TensorFlow">
+                            <span>TensorFlow</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/pytorch.svg" alt="PyTorch">
+                            <span>PyTorch</span>
+                        </div>
+
+
+                        <!-- ACCESSIBILITY & QA -->
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/w3c.svg" alt="WCAG / W3C">
+                            <span>WCAG 2.2</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/testinglibrary.svg"
+                                alt="Testing">
+                            <span>Axe Testing</span>
+                        </div>
+
+
+                        <!-- TOOLS -->
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/git.svg" alt="Git">
+                            <span>Git</span>
+                        </div>
+
+                        <div class="tecnologias">
+                            <img src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg" alt="GitHub">
+                            <span>GitHub</span>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <a href="CV.pdf" target="_blank">
+                <button>
+                    Download CV
+                    <span class="overlay"></span>
+                </button>
+            </a>
+        </div>
+    </section>
+
+
+    <!--Seccion educacion y proyectos-->
+    <section id="educacion_proyectos" class="curriculum">
+        <div class="contenido-seccion">
+            <h2>Resume</h2>
+            <p>Currently studying Software Engineering at Ciudad Universitaria José Antonio Echeverría (CUJAE), 4th year
+                student with expected graduation in 2026. Below are some of my academic projects:</p>
+
+            <div class="fila">
+                <div class="col izquierda">
+                    <div class="item izquierda">
+                        <h4>Comparative Analysis: Federated vs Traditional Learning</h4>
+                        <span class="centro">AI Research Project</span>
+                        <span class="fecha">2024</span>
+                        <p>Conducted academic research evaluating Federated Learning effectiveness compared to
+                            centralized models. Implemented federated training workflows across ten UCI datasets to
+                            compare performance, privacy guarantees, and robustness.</p>
+                        <p><strong>Technologies:</strong> Python, Federated Learning, Flex, UCI Datasets</p>
+                        <a href="https://github.com/AdrianRodriguezJorge/test_FL.git" target="_blank">View on GitHub</a>
+                        <div class="conectori">
+                            <div class="circuloi"></div>
+                        </div>
+                    </div>
+
+                    <div class="item izquierda">
+                        <h4>Animal Shelter Management Application</h4>
+                        <span class="centro">Software Architecture Project</span>
+                        <span class="fecha">2024</span>
+                        <p>Developed an application to automate animal shelter management with CRUD functionality for
+                            animals and staff. Integrated PDF reporting with JasperReports and implemented role-based
+                            authentication.</p>
+                        <p><strong>Technologies:</strong> Java, JasperReports, PostgreSQL</p>
+                        <a href="https://github.com/Erick0330/RefugioVSC.git" target="_blank">View on GitHub</a>
+                        <div class="conectori">
+                            <div class="circuloi"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col derecha">
+                    <div class="item derecha">
+                        <h4>Mass Spectrometry Workshop Web Platform</h4>
+                        <span class="centro">Frontend Development Project</span>
+                        <span class="fecha">2024</span>
+                        <p>Designed and developed a fully responsive web platform to promote a Mass Spectrometry
+                            workshop, showcasing frontend engineering and UI/UX design skills with Vue.js.</p>
+                        <p><strong>Technologies:</strong> Vue.js, HTML, CSS, responsive design, UI/UX</p>
+                        <a href="https://github.com/Frick0330/curso_espectrometria_masa" target="_blank">View on
+                            GitHub</a>
+                        <div class="conectord">
+                            <div class="circulod"></div>
+                        </div>
+                    </div>
+
+                    <div class="item derecha">
+                        <h4>Tic-Tac-Toe Game</h4>
+                        <span class="centro">Full Stack Development</span>
+                        <span class="fecha">2024</span>
+                        <p>Designed and developed a web-based Tic-Tac-Toe game for two players with multiversal travel
+                            theme that alters color palette, icons, images, and background music upon winning.</p>
+                        <p><strong>Technologies:</strong> Vue.js</p>
+                        <a href="https://github.com/Frick0330/tic-tac-toe.git" target="_blank">View on GitHub</a>
+                        <div class="conectord">
+                            <div class="circulod"></div>
+                        </div>
+                    </div>
+
+                    <div class="item derecha">
+                        <h4>iMessage Simulator</h4>
+                        <span class="centro">Data Structures Project</span>
+                        <span class="fecha">2023</span>
+                        <p>Developed an offline email system simulation implementing a Circular Queue data structure
+                            from scratch to efficiently manage emails with graphical interface and data persistence.</p>
+                        <p><strong>Technologies:</strong> C++</p>
+                        <a href="https://github.com/Erick0330/iMessageSimulator.git" target="_blank">View on GitHub</a>
+                        <div class="conectord">
+                            <div class="circulod"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Seccion experiencia laboral-->
+    <section id="experiencia" class="experiencia">
+        <div class="contenido-seccion">
+            <h2>Work Experience</h2>
+
+            <div class="proyecto">
+                <h3>Web Accessibility Auditor/Tester</h3>
+                <span class="empresa">A11ySolutions</span>
+                <span class="fecha">January 2025 - Present</span>
+                <p>Worked in Quality Assurance, initially performing functional testing for web applications including
+                    high-visibility platforms like BillShark.com. Later transitioned to Web Accessibility Auditor,
+                    leading accessibility evaluation projects for Crownpeak. Identified, documented, and reported WCAG
+                    compliance issues across multiple enterprise-level websites.</p>
+                <p><strong>Key Responsibilities:</strong></p>
+                <ul>
+                    <li>Validated user flows and detected functional defects</li>
+                    <li>Ensured consistent performance across supported environments</li>
+                    <li>Produced clear, testable issue reports and collaborated with development teams</li>
+                    <li>Performed accessibility audits using screen readers (NVDA/JAWS/VoiceOver)</li>
+                </ul>
+                <p><strong>Technologies:</strong> Functional testing, WCAG 2.2, screen readers, accessibility auditing,
+                    issue documentation, regression testing</p>
+            </div>
+
+            <div class="proyecto">
+                <h3>Full-Stack Web Developer</h3>
+                <span class="empresa">ALASoluciones</span>
+                <span class="fecha">October 2024 - May 2025</span>
+                <p>Worked on two of the company's most innovative projects as a Full Stack Software Engineer.
+                    Contributed to a real-time GPS vehicle monitoring system based on Traccar and helped build a
+                    simplified version for Gaviota. Also participated in the initial design and architecture of an
+                    intelligent charging system with ETECSA's Transfermóvil integration for secure payments.</p>
+                <p><strong>Key Responsibilities:</strong></p>
+                <ul>
+                    <li>Fixed bugs and improved backend performance for GPS monitoring system</li>
+                    <li>Redesigned UI for non-technical users in Gaviota version</li>
+                    <li>Collaborated on core components, user flows, and API integrations</li>
+                    <li>Worked on secure payment integration across distributed charging stations</li>
+                </ul>
+                <p><strong>Technologies:</strong> Nest.js, Spring Boot, Angular, Vue.js, Java, TypeScript, REST APIs</p>
+                <a href="https://github.com/Erick0330/Cargando.git" target="_blank">Project 1 on GitHub</a> |
+                <a href="https://github.com/Nelsonma98/SmartCharger-back.git" target="_blank">Project 2 on GitHub</a>
+            </div>
+
+            <div class="proyecto">
+                <h3>Backend Developer</h3>
+                <span class="empresa">ETECSA</span>
+                <span class="fecha">August 2024 - November 2024</span>
+                <p>Contributed to the development of a digital transformation consulting application for businesses.
+                    Responsible for designing and managing the database as well as developing the backend system.
+                    Collaborated with a team of three developers to deliver a robust solution that generates graphs and
+                    tables to assess digital transformation levels.</p>
+                <p><strong>Key Responsibilities:</strong></p>
+                <ul>
+                    <li>Designed and managed database architecture</li>
+                    <li>Developed backend system for digital transformation assessment</li>
+                    <li>Collaborated in a team of three developers</li>
+                    <li>Implemented data visualization through graphs and tables</li>
+                </ul>
+                <p><strong>Technologies:</strong> Java, SQLite</p>
+                <a href="https://github.com/Erick0330/TETRDIG.git" target="_blank">View on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!--Footer-->
+    <footer>
+        <div class="footer-contenido">
+
+            <!-- Sección de contacto -->
+            <div class="footer-contacto">
+                <h3>Have a project in mind?</h3>
+                <p>I'm avaliable for work opportunities and collaborations</p>
+                <a href="mailto:abdielrl0330@gmail.com" class="btn-contacto">Contact me</a>
+            </div>
+
+            <!-- Redes sociales mejoradas -->
+            <div class="footer-redes">
+                <div class="redes-contenedor">
+                    <a href="mailto:abdielrl0330@gmail.com" class="red-social" aria-label="Email">
+                        <div class="icono-red">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"
+                                    stroke="currentColor" stroke-width="2" />
+                                <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" />
+                            </svg>
+                        </div>
+                        <span>Email</span>
+                    </a>
+
+                    <a href="https://github.com/Erick0330" class="red-social" aria-label="GitHub">
+                        <div class="icono-red">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9 19C4 20.5 4 16.5 2 16M16 22V18.13C16.04 17.65 15.95 17.17 15.74 16.73C15.53 16.29 15.21 15.91 14.81 15.64C17.73 15.34 20.73 14.31 20.73 8.63C20.73 7.18 20.22 5.84 19.27 4.78C19.65 3.56 19.63 2.24 19.12 1.04C19.12 1.04 17.96 0.69 15.27 2.48C13.07 1.86 10.73 1.86 8.53 2.48C5.84 0.69 4.68 1.04 4.68 1.04C4.17 2.24 4.15 3.56 4.53 4.78C3.58 5.84 3.07 7.18 3.07 8.63C3.07 14.3 6.07 15.33 8.99 15.64C8.59 15.91 8.27 16.29 8.06 16.73C7.85 17.17 7.76 17.65 7.8 18.13V22"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <span>GitHub</span>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/abdiel-rodr%C3%ADguez-lara-9147b8290" class="red-social"
+                        aria-label="LinkedIn">
+                        <div class="icono-red">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M6 9H2V21H6V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path
+                                    d="M4 6C5.10457 6 6 5.10457 6 4C6 2.89543 5.10457 2 4 2C2.89543 2 2 2.89543 2 4C2 5.10457 2.89543 6 4 6Z"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <span>LinkedIn</span>
+                    </a>
+
+                    <a href="https://t.me/GodKiller_Gray030730" class="red-social" aria-label="Telegram">
+                        <div class="icono-red">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 5L2 12.5L9 15M21 5L15 21L9 15M21 5L9 15" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <span>Telegram</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Información de copyright -->
+            <div class="footer-info">
+                <div class="footer-derechos">
+                    <p>&copy; 2025 Abdiel Rodríguez Lara. All rights reserved</p>
+                    <p>Developed with ❤️ from Cuba</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
