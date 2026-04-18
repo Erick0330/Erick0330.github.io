@@ -2,9 +2,7 @@
 const ROLES = [
   "AI Engineer",
   "Full-Stack Developer",
-  "RAG Architect",
-  "Bioinformatics Engineer",
-  "Accessibility Auditor"
+  "Bioinformatics Engineer"
 ];
 
 const SKILLS = {
