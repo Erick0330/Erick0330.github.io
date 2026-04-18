@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Abdiel Rodríguez — Software & AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0f12;
+    --bg-2:#11161a;
+    --panel:#161b22;
+    --panel-2:#1c232b;
+    --line:#222a32;
+    --text:#e6edf3;
+    --muted:#8b96a3;
+    --accent:#1CB698;
+    --accent-soft:rgba(28,182,152,.12);
+    --accent-dim:rgba(28,182,152,.35);
+    --danger:#ff6b6b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter', system-ui, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* Grainy noise overlay */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.35 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/></svg>");
+    opacity:.06;
+    pointer-events:none;
+    z-index:1;
+    mix-blend-mode:overlay;
+  }
+  /* Animated gradient glows */
+  .glow{
+    position:fixed;width:700px;height:700px;border-radius:50%;
+    filter:blur(120px);opacity:.22;pointer-events:none;z-index:0;
+  }
+  .glow.a{background:var(--accent);top:-200px;left:-200px;animation:float1 18s ease-in-out infinite}
+  .glow.b{background:#2b6cff;bottom:-300px;right:-200px;animation:float2 22s ease-in-out infinite;opacity:.12}
+  @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(120px,80px)}}
+  @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-100px,-60px)}}
+
+  h1,h2,h3,h4{font-family:'Space Grotesk', sans-serif;font-weight:600;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .mono{font-family:'JetBrains Mono', ui-monospace, monospace}
+
+  /* NAV */
+  nav.top{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:18px 48px;
+    background:rgba(11,15,18,.6);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s, padding .3s;
+  }
+  nav.top.scrolled{border-color:var(--line);padding:12px 48px}
+  nav.top .logo{
+    font-family:'Space Grotesk';font-weight:700;font-size:22px;
+    display:flex;align-items:center;gap:10px;
+  }
+  nav.top .logo .dot{
+    width:10px;height:10px;border-radius:2px;background:var(--accent);
+    box-shadow:0 0 12px var(--accent);animation:pulse 2s infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  nav.top ul{display:flex;gap:4px;list-style:none}
+  nav.top ul a{
+    padding:8px 16px;border-radius:8px;font-size:14px;color:var(--muted);
+    transition:all .2s;display:inline-flex;align-items:center;gap:6px;
+  }
+  nav.top ul a:hover{color:var(--text);background:var(--panel)}
+  nav.top ul a.active{color:var(--accent);background:var(--accent-soft)}
+  nav.top ul a .num{font-family:'JetBrains Mono';font-size:11px;color:var(--accent);opacity:.7}
+  .nav-cv{
+    padding:8px 16px;border:1px solid var(--accent);border-radius:8px;
+    color:var(--accent);font-size:13px;font-weight:500;
+    transition:all .2s;
+  }
+  .nav-cv:hover{background:var(--accent);color:#0b0f12}
+  .burger{display:none;width:36px;height:36px;flex-direction:column;justify-content:center;align-items:center;gap:4px;cursor:pointer;background:none;border:none;color:var(--text)}
+  .burger span{width:22px;height:2px;background:currentColor;transition:.25s}
+  .burger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .burger.open span:nth-child(2){opacity:0}
+  .burger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+
+  section{position:relative;z-index:2;padding:120px 48px;max-width:1280px;margin:0 auto}
+  .section-label{
+    display:inline-flex;align-items:center;gap:12px;
+    font-family:'JetBrains Mono';font-size:13px;color:var(--accent);
+    margin-bottom:16px;
+  }
+  .section-label::before{content:"";width:28px;height:1px;background:var(--accent)}
+  .section-title{font-size:clamp(32px,5vw,52px);margin-bottom:48px;line-height:1.1}
+  .section-title .muted{color:var(--muted);font-weight:400}
+
+  /* HERO */
+  .hero{
+    min-height:100vh;display:flex;align-items:center;
+    padding-top:120px;padding-bottom:80px;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:center;width:100%;
+  }
+  .hero-terminal{
+    font-family:'JetBrains Mono';font-size:13px;color:var(--muted);
+    margin-bottom:24px;display:flex;align-items:center;gap:10px;
+  }
+  .hero-terminal .prompt{color:var(--accent)}
+  .hero h1{
+    font-size:clamp(44px,7vw,88px);line-height:1.02;
+    font-weight:700;letter-spacing:-.02em;margin-bottom:18px;
+  }
+  .hero h1 .accent{
+    background:linear-gradient(135deg, var(--accent), #7fe8cc);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero .role{
+    font-size:clamp(20px,3vw,30px);color:var(--muted);
+    margin-bottom:28px;font-weight:400;min-height:1.3em;
+    font-family:'Space Grotesk';
+  }
+  .hero .role .cursor{
+    display:inline-block;width:3px;height:1em;background:var(--accent);
+    vertical-align:-3px;margin-left:4px;animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{50%{opacity:0}}
+  .hero .bio{
+    max-width:540px;color:#b8c1cc;margin-bottom:36px;font-size:16px;
+  }
+  .hero .bio b{color:var(--text);font-weight:500}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 24px;border-radius:10px;font-weight:500;
+    font-size:14px;transition:all .25s;cursor:pointer;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--accent);color:#0b0f12;border-color:var(--accent)}
+  .btn-primary:hover{background:transparent;color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 20px var(--accent-soft)}
+  .btn-ghost{background:transparent;color:var(--text);border-color:var(--line)}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+  .btn svg{width:16px;height:16px}
+
+  .hero-socials{display:flex;gap:16px}
+  .hero-socials a{
+    width:44px;height:44px;border-radius:10px;border:1px solid var(--line);
+    display:inline-flex;align-items:center;justify-content:center;
+    color:var(--muted);transition:all .25s;position:relative;
+  }
+  .hero-socials a:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-3px);background:var(--accent-soft)}
+  .hero-socials svg{width:18px;height:18px}
+
+  /* Portrait composition */
+  .portrait-wrap{
+    position:relative;display:flex;justify-content:center;align-items:center;
+    aspect-ratio:3/4;max-width:440px;margin:0 auto;
+  }
+  .portrait-frame{
+    position:absolute;inset:0;
+    border:1px solid var(--line);border-radius:20px;
+    transform:rotate(-3deg);
+    background:
+      linear-gradient(135deg, rgba(28,182,152,.06) 0%, transparent 50%),
+      var(--panel);
+  }
+  .portrait-frame.back{
+    transform:rotate(4deg);background:var(--panel-2);border-color:rgba(28,182,152,.3);
+  }
+  .portrait-img{
+    position:relative;z-index:2;
+    width:90%;height:90%;border-radius:14px;overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,.5), 0 0 0 1px var(--line);
+    background:var(--panel);
+  }
+  .portrait-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .portrait-sticker{
+    position:absolute;z-index:3;
+    background:var(--panel);border:1px solid var(--line);
+    padding:10px 14px;border-radius:10px;font-family:'JetBrains Mono';
+    font-size:12px;display:flex;align-items:center;gap:8px;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+    backdrop-filter:blur(10px);
+  }
+  .portrait-sticker.s1{top:12%;left:-10%;animation:bob 4s ease-in-out infinite}
+  .portrait-sticker.s2{bottom:20%;right:-14%;animation:bob 5s ease-in-out infinite reverse}
+  .portrait-sticker.s3{bottom:-4%;left:10%;animation:bob 6s ease-in-out infinite}
+  .portrait-sticker .tag{color:var(--accent)}
+  .portrait-sticker .dot-green{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent)}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+  /* Scroll indicator */
+  .scroll-ind{
+    position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+    font-family:'JetBrains Mono';font-size:11px;color:var(--muted);
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    letter-spacing:.15em;
+  }
+  .scroll-ind .line{width:1px;height:50px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scroll-hint 2s ease infinite}
+  @keyframes scroll-hint{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+  /* ABOUT / TERMINAL */
+  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px}
+  .terminal{
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    font-family:'JetBrains Mono';font-size:13px;
+    overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);
+  }
+  .terminal-header{
+    display:flex;align-items:center;gap:8px;padding:12px 16px;
+    background:var(--panel-2);border-bottom:1px solid var(--line);
+  }
+  .terminal-header .dot{width:11px;height:11px;border-radius:50%}
+  .terminal-header .dot.r{background:#ff5f56}
+  .terminal-header .dot.y{background:#ffbd2e}
+  .terminal-header .dot.g{background:#27c93f}
+  .terminal-header .title{margin-left:10px;color:var(--muted);font-size:12px}
+  .terminal-body{padding:20px 22px;line-height:1.7;color:#c6cfdb;min-height:300px}
+  .terminal-body .cmd{color:var(--accent)}
+  .terminal-body .path{color:#7dd3fc}
+  .terminal-body .key{color:#c792ea}
+  .terminal-body .str{color:#a6e22e}
+  .terminal-body .out{color:#b8c1cc;display:block;margin:4px 0 10px 0}
+  .terminal-body .comment{color:#6a737d}
+
+  .about-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:28px;margin-bottom:16px;transition:all .25s;
+  }
+  .about-card:hover{border-color:var(--accent-dim);transform:translateY(-2px)}
+  .about-card h3{font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+  .about-card h3 .ico{width:32px;height:32px;border-radius:8px;background:var(--accent-soft);display:inline-flex;align-items:center;justify-content:center;color:var(--accent)}
+  .about-card p{color:var(--muted);font-size:14px}
+  .about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;text-align:center}
+  .stat .n{font-family:'Space Grotesk';font-size:28px;font-weight:600;color:var(--accent);line-height:1}
+  .stat .l{font-size:11px;color:var(--muted);margin-top:6px;text-transform:uppercase;letter-spacing:.1em}
+
+  /* SKILLS */
+  .skills-tabs{display:flex;gap:6px;margin-bottom:32px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:0}
+  .skill-tab{
+    padding:12px 20px;background:none;border:none;color:var(--muted);
+    font-family:inherit;font-size:14px;cursor:pointer;border-bottom:2px solid transparent;
+    margin-bottom:-1px;transition:all .2s;display:inline-flex;align-items:center;gap:8px;
+  }
+  .skill-tab .count{font-family:'JetBrains Mono';font-size:11px;opacity:.6}
+  .skill-tab:hover{color:var(--text)}
+  .skill-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+  .skills-grid{
+    display:grid;grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));
+    gap:12px;
+  }
+  .skill{
+    background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:20px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:12px;transition:all .25s;cursor:default;position:relative;overflow:hidden;
+    aspect-ratio:1.1/1;
+  }
+  .skill::before{
+    content:"";position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%), var(--accent-soft), transparent 60%);
+    opacity:0;transition:opacity .3s;pointer-events:none;
+  }
+  .skill:hover{border-color:var(--accent-dim);transform:translateY(-4px)}
+  .skill:hover::before{opacity:1}
+  .skill img{width:36px;height:36px;filter:invert(100%);transition:filter .25s}
+  .skill:hover img{filter:invert(60%) sepia(40%) saturate(600%) hue-rotate(120deg)}
+  .skill span{font-size:13px;color:var(--muted);text-align:center;z-index:1}
+  .skill:hover span{color:var(--text)}
+
+  /* EXPERIENCE TIMELINE */
+  .timeline{position:relative;padding-left:0}
+  .timeline-list{display:grid;grid-template-columns:220px 1fr;gap:0}
+  .timeline-nav{
+    position:sticky;top:100px;align-self:start;
+    display:flex;flex-direction:column;gap:0;padding-right:24px;
+    border-right:1px solid var(--line);
+  }
+  .tl-nav-item{
+    background:none;border:none;color:var(--muted);text-align:left;
+    padding:14px 16px;cursor:pointer;font-family:inherit;
+    border-right:2px solid transparent;margin-right:-25px;
+    font-size:14px;transition:all .2s;display:flex;flex-direction:column;gap:2px;
+  }
+  .tl-nav-item .company{font-weight:500}
+  .tl-nav-item .date{font-family:'JetBrains Mono';font-size:11px;color:var(--muted);opacity:.7}
+  .tl-nav-item:hover{color:var(--text)}
+  .tl-nav-item.active{
+    color:var(--accent);border-right-color:var(--accent);background:var(--accent-soft);
+  }
+  .tl-panels{padding-left:40px}
+  .tl-panel{display:none;animation:fadeInUp .4s ease}
+  .tl-panel.active{display:block}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  .tl-panel h3{font-size:24px;margin-bottom:4px}
+  .tl-panel h3 .at{color:var(--accent)}
+  .tl-panel .meta{font-family:'JetBrains Mono';font-size:12px;color:var(--muted);margin-bottom:20px;display:flex;gap:16px;flex-wrap:wrap}
+  .tl-panel .meta span{display:inline-flex;align-items:center;gap:6px}
+  .tl-panel ul{list-style:none;padding:0;margin-bottom:20px}
+  .tl-panel ul li{
+    position:relative;padding-left:26px;margin-bottom:12px;color:#c6cfdb;font-size:15px;
+  }
+  .tl-panel ul li::before{
+    content:"▸";position:absolute;left:0;top:0;color:var(--accent);font-size:14px;
+  }
+  .tl-panel .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .tag{
+    font-family:'JetBrains Mono';font-size:11px;color:var(--accent);
+    padding:4px 10px;border:1px solid var(--accent-dim);border-radius:20px;
+    background:var(--accent-soft);
+  }
+  .tl-panel .links{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+  .tl-panel .links a{
+    font-size:13px;color:var(--accent);display:inline-flex;align-items:center;gap:6px;
+    padding:8px 14px;border:1px solid var(--accent-dim);border-radius:8px;transition:.2s;
+  }
+  .tl-panel .links a:hover{background:var(--accent-soft);transform:translateY(-2px)}
+
+  /* PROJECTS */
+  .proj-grid{
+    display:grid;grid-template-columns:repeat(auto-fill, minmax(320px, 1fr));gap:20px;
+  }
+  .proj-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:0;overflow:hidden;transition:all .3s;
+    display:flex;flex-direction:column;position:relative;
+  }
+  .proj-card:hover{border-color:var(--accent-dim);transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+  .proj-visual{
+    height:160px;position:relative;overflow:hidden;
+    background:linear-gradient(135deg, var(--panel-2), var(--panel));
+    display:flex;align-items:center;justify-content:center;
+    border-bottom:1px solid var(--line);
+  }
+  .proj-visual .icon-big{
+    width:56px;height:56px;color:var(--accent);opacity:.8;
+  }
+  .proj-visual .glyph{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono';font-size:11px;color:var(--muted);
+    background:repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,.015) 10px, rgba(255,255,255,.015) 20px);
+  }
+  .proj-body{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
+  .proj-body .ptype{font-family:'JetBrains Mono';font-size:11px;color:var(--accent);margin-bottom:8px;text-transform:uppercase;letter-spacing:.1em}
+  .proj-body h4{font-size:18px;margin-bottom:10px;font-family:'Space Grotesk'}
+  .proj-body p{color:var(--muted);font-size:14px;margin-bottom:16px;flex:1;line-height:1.55}
+  .proj-body .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+  .proj-body .tag{font-size:10px;padding:3px 8px}
+  .proj-body .p-links{display:flex;gap:14px;border-top:1px solid var(--line);padding-top:14px}
+  .proj-body .p-links a{color:var(--muted);font-size:13px;display:inline-flex;align-items:center;gap:6px;transition:.2s}
+  .proj-body .p-links a:hover{color:var(--accent)}
+  .proj-body .p-links svg{width:14px;height:14px}
+
+  /* CONTACT */
+  .contact{
+    background:
+      radial-gradient(circle at 20% 50%, var(--accent-soft), transparent 50%),
+      var(--panel);
+    border:1px solid var(--line);border-radius:20px;
+    padding:60px 48px;text-align:center;margin-top:40px;position:relative;overflow:hidden;
+  }
+  .contact::before{
+    content:"";position:absolute;top:-100px;right:-100px;width:400px;height:400px;
+    background:radial-gradient(circle, var(--accent-soft), transparent 70%);
+    pointer-events:none;
+  }
+  .contact h2{font-size:clamp(32px,5vw,48px);margin-bottom:16px;position:relative}
+  .contact p{color:var(--muted);max-width:520px;margin:0 auto 32px;font-size:16px;position:relative}
+  .contact .btn{position:relative}
+  .contact-row{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:28px;position:relative}
+  .contact-row a{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:10px 16px;border-radius:10px;color:var(--muted);font-size:14px;
+    border:1px solid transparent;transition:.2s;font-family:'JetBrains Mono';
+  }
+  .contact-row a:hover{color:var(--accent);border-color:var(--accent-dim);background:var(--accent-soft)}
+  .contact-row svg{width:16px;height:16px}
+
+  footer{
+    padding:40px 48px;text-align:center;border-top:1px solid var(--line);
+    font-family:'JetBrains Mono';font-size:12px;color:var(--muted);
+    margin-top:80px;position:relative;z-index:2;
+  }
+  footer a{color:var(--accent)}
+
+  /* BACK TO TOP */
+  .back-top{
+    position:fixed;bottom:28px;right:28px;z-index:40;
+    width:44px;height:44px;border-radius:50%;background:var(--accent);color:#0b0f12;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    box-shadow:0 10px 30px var(--accent-soft);
+    opacity:0;pointer-events:none;transition:all .3s;border:none;
+  }
+  .back-top.show{opacity:1;pointer-events:auto}
+  .back-top:hover{transform:translateY(-4px)}
+
+  /* Reveal on scroll */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1;transform:translateY(0)}
+
+  /* Responsive */
+  @media (max-width:980px){
+    nav.top{padding:14px 20px}
+    nav.top.scrolled{padding:10px 20px}
+    nav.top ul{display:none}
+    .nav-cv{display:none}
+    .burger{display:flex}
+    nav.top.menu-open ul{
+      display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;
+      background:var(--bg-2);border-bottom:1px solid var(--line);padding:14px 20px;gap:4px;
+    }
+    section{padding:90px 20px}
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    .portrait-wrap{max-width:320px}
+    .about-grid{grid-template-columns:1fr;gap:30px}
+    .timeline-list{grid-template-columns:1fr}
+    .timeline-nav{position:static;flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--line);padding-right:0;padding-bottom:0;gap:0}
+    .tl-nav-item{border-right:none;border-bottom:2px solid transparent;margin-right:0;margin-bottom:-1px;white-space:nowrap}
+    .tl-nav-item.active{border-right-color:transparent;border-bottom-color:var(--accent)}
+    .tl-panels{padding-left:0;padding-top:24px}
+    .contact{padding:40px 24px}
+    .portrait-sticker.s1{left:-4%}
+    .portrait-sticker.s2{right:-6%}
+  }
+</style>
+</head>
+<body>
+
+<div class="glow a"></div>
+<div class="glow b"></div>
+
+<!-- NAV -->
+<nav class="top" id="topnav">
+  <a href="#hero" class="logo"><span class="dot"></span>abdiel<span style="color:var(--accent)">.</span></a>
+  <ul id="navlist">
+    <li><a href="#hero" data-section="hero"><span class="num">01</span> Home</a></li>
+    <li><a href="#about" data-section="about"><span class="num">02</span> About</a></li>
+    <li><a href="#skills" data-section="skills"><span class="num">03</span> Skills</a></li>
+    <li><a href="#experience" data-section="experience"><span class="num">04</span> Experience</a></li>
+    <li><a href="#projects" data-section="projects"><span class="num">05</span> Projects</a></li>
+    <li><a href="#contact" data-section="contact"><span class="num">06</span> Contact</a></li>
+  </ul>
+  <a href="CV.pdf" target="_blank" class="nav-cv">Resume ↗</a>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-terminal">
+        <span class="prompt">~/abdiel</span>
+        <span>❯</span>
+        <span>whoami</span>
+      </div>
+      <h1>Abdiel<br/>Rodríguez <span class="accent">Lara</span></h1>
+      <div class="role"><span id="role-text"></span><span class="cursor"></span></div>
+      <p class="bio">
+        <b>AI Engineer</b> &amp; Full-Stack Developer building production-grade
+        <b>RAG architectures</b>, multi-agent systems, and scalable platforms from Havana, Cuba.
+        Currently engineering autonomous AI workflows at <b>AIKoders</b>.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-primary">
+          Get in touch
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="CV.pdf" target="_blank" class="btn btn-ghost">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Download CV
+        </a>
+      </div>
+      <div class="hero-socials">
+        <a href="mailto:abdielrl0330@gmail.com" aria-label="Email" title="abdielrl0330@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6L12 13 2 6"/></svg>
+        </a>
+        <a href="https://github.com/Erick0330" target="_blank" aria-label="GitHub" title="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.93c.58.11.79-.25.79-.56v-1.96c-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.19a11 11 0 0 1 5.78 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.35.77 1.05.77 2.11v3.13c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/abdiel-rodr%C3%ADguez-lara-9147b8290" target="_blank" aria-label="LinkedIn" title="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.3c0-1.3 0-2.9-1.8-2.9-1.8 0-2 1.4-2 2.8V21h-4V9z"/></svg>
+        </a>
+        <a href="https://t.me/GodKiller_Gray030730" target="_blank" aria-label="Telegram" title="Telegram">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.24 3.64 11.95c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="portrait-wrap">
+      <div class="portrait-frame back"></div>
+      <div class="portrait-frame"></div>
+      <div class="portrait-img">
+        <img src="assets/me.jpg" alt="Abdiel Rodríguez"/>
+      </div>
+      <div class="portrait-sticker s1">
+        <span class="dot-green"></span>
+        <span>Available for work</span>
+      </div>
+      <div class="portrait-sticker s2">
+        <span class="tag">›_</span>
+        <span>AI Engineer</span>
+      </div>
+      <div class="portrait-sticker s3">
+        <span class="tag">📍</span>
+        <span>Havana, Cuba</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-ind"><span>SCROLL</span><span class="line"></span></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label reveal">02 — About me</div>
+  <h2 class="section-title reveal">Engineer at the<br/><span class="muted">intersection of AI &amp; full-stack.</span></h2>
+
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="terminal">
+        <div class="terminal-header">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="title">abdiel@portfolio:~</span>
+        </div>
+        <div class="terminal-body" id="term-body">
+<span class="cmd">$</span> cat <span class="path">profile.yaml</span>
+<span class="out"></span>
+<span class="key">name</span>: <span class="str">"Abdiel Rodríguez Lara"</span>
+<span class="key">role</span>: <span class="str">"AI Engineer &amp; Full-Stack Dev"</span>
+<span class="key">location</span>: <span class="str">"Marianao, Havana, Cuba"</span>
+<span class="key">education</span>:
+  <span class="key">- degree</span>: <span class="str">"Software Engineering"</span>
+  <span class="key">  school</span>: <span class="str">"CUJAE"</span>
+  <span class="key">  year</span>: <span class="str">"4th / graduating 2026"</span>
+<span class="key">focus</span>:
+  - <span class="str">"RAG architectures"</span>
+  - <span class="str">"Multi-agent systems"</span>
+  - <span class="str">"Federated Learning"</span>
+  - <span class="str">"Cybersecurity"</span>
+<span class="key">languages</span>:
+  - <span class="str">"Spanish (native)"</span>
+  - <span class="str">"English (B1)"</span>
+
+<span class="cmd">$</span> echo <span class="str">"Ready to build."</span>
+<span class="out">Ready to build.</span>
+<span class="cmd">$</span> <span class="cursor" style="display:inline-block;width:8px;height:14px;background:var(--accent);vertical-align:-2px;animation:blink 1s step-end infinite"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="about-card">
+        <h3><span class="ico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </span> AI Architecture</h3>
+        <p>Design and deploy production RAG systems, multi-agent orchestration (MCP, OpenClaw), and LLM pipelines with vector DBs (Qdrant, Supabase).</p>
+      </div>
+      <div class="about-card">
+        <h3><span class="ico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+        </span> Full-Stack Engineering</h3>
+        <p>Scalable backends in Spring Boot, Nest.js, FastAPI. Frontends in Angular, Vue, Next.js. Database design with PostgreSQL/PostGIS.</p>
+      </div>
+      <div class="about-card">
+        <h3><span class="ico">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </span> Research &amp; QA</h3>
+        <p>Federated Learning research, bioinformatics algorithm design at CIGB, and WCAG 2.2 accessibility auditing for enterprise platforms.</p>
+      </div>
+
+      <div class="about-stats">
+        <div class="stat"><div class="n">7+</div><div class="l">Companies</div></div>
+        <div class="stat"><div class="n">15+</div><div class="l">Projects</div></div>
+        <div class="stat"><div class="n">4</div><div class="l">Years Coding</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label reveal">03 — Tech stack</div>
+  <h2 class="section-title reveal">Tools I <span class="muted">ship with.</span></h2>
+
+  <div class="skills-tabs reveal" id="skillsTabs"></div>
+  <div class="skills-grid reveal" id="skillsGrid"></div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label reveal">04 — Work history</div>
+  <h2 class="section-title reveal">Where I've <span class="muted">built things.</span></h2>
+
+  <div class="timeline reveal">
+    <div class="timeline-list">
+      <div class="timeline-nav" id="tlNav"></div>
+      <div class="tl-panels" id="tlPanels"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label reveal">05 — Selected projects</div>
+  <h2 class="section-title reveal">Things I've <span class="muted">built &amp; researched.</span></h2>
+  <div class="proj-grid" id="projGrid"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding-bottom:40px">
+  <div class="contact reveal">
+    <div class="section-label" style="margin-bottom:20px">06 — Let's talk</div>
+    <h2>Have a project<br/>in mind?</h2>
+    <p>I'm open to opportunities in AI engineering, full-stack development, and research collaborations. Drop a line — I usually reply within a day.</p>
+    <a href="mailto:abdielrl0330@gmail.com" class="btn btn-primary">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6L12 13 2 6"/></svg>
+      abdielrl0330@gmail.com
+    </a>
+    <div class="contact-row">
+      <a href="https://github.com/Erick0330" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.93c.58.11.79-.25.79-.56v-1.96c-3.2.7-3.88-1.54-3.88-1.54-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.18 1.19a11 11 0 0 1 5.78 0c2.2-1.5 3.17-1.19 3.17-1.19.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.26 5.68.41.35.77 1.05.77 2.11v3.13c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5z"/></svg>
+        /Erick0330
+      </a>
+      <a href="https://www.linkedin.com/in/abdiel-rodr%C3%ADguez-lara-9147b8290" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.1c.5-.9 1.8-1.9 3.7-1.9 4 0 4.7 2.6 4.7 6V21h-4v-5.3c0-1.3 0-2.9-1.8-2.9-1.8 0-2 1.4-2 2.8V21h-4V9z"/></svg>
+        /abdiel-rodríguez-lara
+      </a>
+      <a href="https://t.me/GodKiller_Gray030730" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.24 3.64 11.95c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+        Telegram
+      </a>
+      <a href="tel:+5358473229">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+        +53 58473229
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Abdiel Rodríguez Lara. Built with care from <a href="#">La Habana, Cuba</a> 🇨🇺</p>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="portfolio.js"></script>
+</body>
+</html>
