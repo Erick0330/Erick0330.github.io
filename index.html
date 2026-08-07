@@ -432,6 +432,73 @@
     .portrait-sticker.s1{top:-5%;left:auto;right:5%}
     .portrait-sticker.s2{right:-6%}
   }
+
+  /* CV MODAL */
+  .cv-modal{
+    position:fixed;inset:0;z-index:100;
+    display:none;align-items:center;justify-content:center;
+    padding:20px;
+  }
+  .cv-modal.open{display:flex}
+  .cv-modal-backdrop{
+    position:absolute;inset:0;
+    background:rgba(6,9,11,.75);
+    backdrop-filter:blur(6px);
+    animation:fadeIn .2s ease;
+  }
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .cv-modal-panel{
+    position:relative;z-index:1;
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:32px;max-width:560px;width:100%;
+    box-shadow:0 30px 80px rgba(0,0,0,.5);
+    animation:slideUp .3s ease;
+  }
+  @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .cv-modal-close{
+    position:absolute;top:14px;right:14px;
+    width:36px;height:36px;border-radius:8px;
+    background:transparent;border:1px solid var(--line);color:var(--muted);
+    font-size:20px;line-height:1;cursor:pointer;transition:.2s;
+    display:inline-flex;align-items:center;justify-content:center;
+  }
+  .cv-modal-close:hover{color:var(--text);border-color:var(--accent-dim)}
+  .cv-modal-header{margin-bottom:22px}
+  .cv-modal-header h3{
+    font-family:'Space Grotesk';font-size:22px;margin-bottom:6px;
+  }
+  .cv-modal-header p{color:var(--muted);font-size:14px}
+  .cv-modal-options{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .cv-option{
+    display:flex;flex-direction:column;gap:8px;
+    padding:20px 18px;border-radius:12px;
+    background:var(--panel-2);border:1px solid var(--line);
+    color:var(--text);transition:all .25s;cursor:pointer;
+    text-decoration:none;
+  }
+  .cv-option:hover{
+    border-color:var(--accent);background:var(--accent-soft);
+    transform:translateY(-3px);box-shadow:0 10px 30px var(--accent-soft);
+  }
+  .cv-option-ico{
+    width:38px;height:38px;border-radius:9px;
+    background:var(--accent-soft);color:var(--accent);
+    display:inline-flex;align-items:center;justify-content:center;
+    margin-bottom:6px;
+  }
+  .cv-option-ico svg{width:20px;height:20px}
+  .cv-option-title{
+    font-family:'Space Grotesk';font-weight:600;font-size:16px;color:var(--text);
+  }
+  .cv-option-desc{font-size:12px;color:var(--muted);line-height:1.5}
+  .cv-option-tag{
+    font-family:'JetBrains Mono';font-size:10px;color:var(--accent);
+    margin-top:6px;text-transform:uppercase;letter-spacing:.1em;
+  }
+  @media (max-width:640px){
+    .cv-modal-options{grid-template-columns:1fr}
+    .cv-modal-panel{padding:26px 22px}
+  }
 </style>
 </head>
 <body>
@@ -450,7 +517,7 @@
     <li><a href="#projects" data-section="projects"><span class="num">05</span> Projects</a></li>
     <li><a href="#contact" data-section="contact"><span class="num">06</span> Contact</a></li>
   </ul>
-  <a href="CV.pdf" target="_blank" class="nav-cv">Resume ↗</a>
+  <a href="#" data-cv-open class="nav-cv">Resume ↗</a>
   <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
@@ -468,16 +535,16 @@
       <p class="bio">
         <b>Agentic AI Engineer</b> building LLM-powered agents that plan, call tools, and
         execute multi-step workflows autonomously — with a research background in
-        <b>robust federated learning</b> and a <b>full-stack</b> foundation across
+        <b>deep learning</b> and a <b>full-stack</b> foundation across
         FastAPI, Next.js, and PostgreSQL. Currently shipping production agents at
-        <b>AIKoders</b>. Relocating to Montréal, QC in Aug 2026.
+        <b>AIKoders</b> from Montréal, Quebec.
       </p>
       <div class="hero-actions">
         <a href="#contact" class="btn btn-primary">
           Get in touch
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </a>
-        <a href="CV.pdf" target="_blank" class="btn btn-ghost">
+        <a href="#" data-cv-open class="btn btn-ghost">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
           Download CV
         </a>
@@ -514,7 +581,7 @@
       </div>
       <div class="portrait-sticker s3">
         <span class="tag">📍</span>
-        <span>Havana → Montréal</span>
+        <span>Montréal, QC</span>
       </div>
     </div>
   </div>
@@ -539,7 +606,7 @@
 <span class="out"></span>
 <span class="key">name</span>: <span class="str">"Abdiel Rodríguez Lara"</span>
 <span class="key">role</span>: <span class="str">"Agentic AI Engineer + ML Researcher"</span>
-<span class="key">location</span>: <span class="str">"La Habana → Montréal, QC (Aug 2026)"</span>
+<span class="key">location</span>: <span class="str">"Montréal, Quebec"</span>
 <span class="key">education</span>:
   <span class="key">- degree</span>: <span class="str">"B.Sc. Software Engineering"</span>
   <span class="key">  school</span>: <span class="str">"CUJAE"</span>
@@ -657,6 +724,36 @@
 <button class="back-top" id="backTop" aria-label="Back to top">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </button>
+
+<!-- CV MODAL -->
+<div class="cv-modal" id="cvModal" aria-hidden="true">
+  <div class="cv-modal-backdrop" data-cv-close></div>
+  <div class="cv-modal-panel" role="dialog" aria-modal="true" aria-labelledby="cvModalTitle">
+    <button class="cv-modal-close" data-cv-close aria-label="Close">×</button>
+    <div class="cv-modal-header">
+      <h3 id="cvModalTitle">Pick a résumé</h3>
+      <p>Two versions tailored for different roles. Both PDFs open in a new tab.</p>
+    </div>
+    <div class="cv-modal-options">
+      <a href="CV_Agentic_AI_Engineer.pdf" target="_blank" rel="noopener" class="cv-option">
+        <span class="cv-option-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+        </span>
+        <div class="cv-option-title">Agentic AI Engineer</div>
+        <div class="cv-option-desc">LLM agents, tool calling, RAG, multi-agent orchestration, LangSmith evals.</div>
+        <div class="cv-option-tag">Agents · RAG · Full-Stack</div>
+      </a>
+      <a href="CV_ML_Engineer.pdf" target="_blank" rel="noopener" class="cv-option">
+        <span class="cv-option-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v6H4zM4 14h16v6H4z"/><path d="M8 7h.01M8 17h.01"/></svg>
+        </span>
+        <div class="cv-option-title">Machine Learning Engineer</div>
+        <div class="cv-option-desc">Deep learning, federated & robust ML, computer vision, PyTorch, YOLO.</div>
+        <div class="cv-option-tag">DL · Federated · Vision</div>
+      </a>
+    </div>
+  </div>
+</div>
 
 <script src="portfolio.js"></script>
 </body>

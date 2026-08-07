@@ -9,27 +9,29 @@ const SKILLS = {
   "Agentic AI": [
     ["Python","python"],["LangChain","langchain"],["OpenAI","openai"],
     ["Anthropic","anthropic"],["FastAPI","fastapi"],["n8n","n8n"],
-    ["Supabase","supabase"],["Qdrant","qdrant"],["Docker","docker"]
+    ["Supabase","supabase"],["Qdrant","qdrant"],["Meilisearch","meilisearch"],
+    ["AWS","amazonwebservices"],["Google Cloud","googlecloud"],["Docker","docker"]
   ],
   "ML / DL": [
     ["Python","python"],["PyTorch","pytorch"],["TensorFlow","tensorflow"],
     ["scikit-learn","scikitlearn"],["NumPy","numpy"],["Pandas","pandas"],
-    ["OpenCV","opencv"],["Jupyter","jupyter"]
+    ["OpenCV","opencv"],["Jupyter","jupyter"],["Google Colab","googlecolab"]
   ],
   "Backend": [
-    ["Java","openjdk"],["Spring Boot","springboot"],["Nest.js","nestjs"],
+    ["Python","python"],["TypeScript","typescript"],["Java","openjdk"],
+    ["FastAPI","fastapi"],["Spring Boot","springboot"],["Nest.js","nestjs"],
     ["Node.js","nodedotjs"],["PostgreSQL","postgresql"],["MySQL","mysql"],
-    ["SQLite","sqlite"],["Redis","redis"]
+    ["SQLite","sqlite"],["Redis","redis"],["C","c"],["C++","cplusplus"]
   ],
   "Frontend": [
-    ["TypeScript","typescript"],["JavaScript","javascript"],["Angular","angular"],
-    ["Vue.js","vuedotjs"],["Next.js","nextdotjs"],["React","react"],
+    ["TypeScript","typescript"],["JavaScript","javascript"],["React","react"],
+    ["Next.js","nextdotjs"],["Angular","angular"],["Vue.js","vuedotjs"],
     ["HTML5","html5"],["CSS3","css3"],["Tailwind","tailwindcss"]
   ],
-  "Tools & QA": [
-    ["Git","git"],["GitHub","github"],["Linux","linux"],
-    ["DigitalOcean","digitalocean"],["WCAG 2.2","w3c"],
-    ["C++","cplusplus"],["C","c"]
+  "Tools & Infra": [
+    ["Git","git"],["GitHub","github"],["GitHub Actions","githubactions"],
+    ["Docker","docker"],["Linux","linux"],["DigitalOcean","digitalocean"],
+    ["Render","render"],["pytest","pytest"],["WCAG 2.2","w3c"]
   ]
 };
 
@@ -369,5 +371,39 @@ const ICONS = {
       b.classList.remove('open');
       nav.classList.remove('menu-open');
     });
+  });
+})();
+
+// ===== CV Modal =====
+(function cvModal(){
+  const modal = document.getElementById('cvModal');
+  if(!modal) return;
+
+  function open(){
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  }
+  function close(){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('[data-cv-open]').forEach(el=>{
+    el.addEventListener('click', e=>{
+      e.preventDefault();
+      open();
+    });
+  });
+  modal.querySelectorAll('[data-cv-close]').forEach(el=>{
+    el.addEventListener('click', close);
+  });
+  // Close the modal after the user picks a CV
+  modal.querySelectorAll('.cv-option').forEach(el=>{
+    el.addEventListener('click', ()=> setTimeout(close, 150));
+  });
+  document.addEventListener('keydown', e=>{
+    if(e.key === 'Escape' && modal.classList.contains('open')) close();
   });
 })();
